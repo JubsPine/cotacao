@@ -6,7 +6,7 @@ const { ptBR } = require('date-fns/locale');
 const holidays = require('date-holidays');
 const path = require('path');
 
-const logDir = 'D:\\juliap\\Documents\\JavaScript\\Cotação de Moedas\\Logs de Execução';
+const logDir = 'C:\\digite\\seu\\repositorio\\cotacao_moedas\\logs';
 const currentDateTime = new Date();
 const formattedTime = format(currentDateTime, "ddMMyyyy_HHmm");
 const logFilePath = path.join(logDir, `log_${formattedTime}.txt`);
