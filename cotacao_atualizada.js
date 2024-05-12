@@ -46,8 +46,37 @@ async function fetchCurrencyRate() {
     } else {
         log("Hoje é domingo, segunda-feira ou feriado. O script não será executado.");
     }
-
-    log("Execução do script finalizada.");
 }
 
-fetchCurrencyRate();
+// Função para buscar mais cotações de APIs específicas
+async function fetchAdditionalRates() {
+    const today = new Date();
+    const data_ini = format(today, "dd/MM/yyyy", { locale: ptBR });
+
+    try {
+        const urls = [
+            `https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativaMercadoMensais?$filter=Indicador%20eq%20'IPC-Fipe'&dataInicial=${data_ini}&dataFinal=${data_ini}`,
+            `https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativaMercadoAnuais?$filter=Indicador%20eq%20'IGP-DI'&dataInicial=${data_ini}&dataFinal=${data_ini}`
+        ];
+
+        for (const url of urls) {
+            const response = await axios.get(url);
+            if (response.status === 200) {
+                const filename = `cotacao_${url.match(/(IPC-Fipe|IGP-DI)/)[0].toLowerCase()}.txt`;
+                fs.writeFileSync(filename, JSON.stringify(response.data));
+                log(`Arquivo ${filename} salvo com sucesso.`);
+            }
+        }
+    } catch (error) {
+        log(`Erro durante as requisições adicionais: ${error}`);
+    }
+}
+
+// Chamando ambas as funções de fetch
+async function main() {
+    await fetchCurrencyRate();
+    await fetchAdditionalRates();
+    log("Todos os processos de cotação foram executados.");
+}
+
+main();
