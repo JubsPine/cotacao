@@ -13,7 +13,7 @@ current_time = datetime.datetime.now()
 formatted_time = current_time.strftime("%d%m%Y_%H%M")
 
 #Caminho do arquivo de log com o timestamp incluído
-log_file_path = f"T:\\Scripts RPA\\Cotação de Moedas\\Logs de Execução\\log_{formatted_time}.txt"
+log_file_path = f"C:\\digite\\seu\\repositorio\\cotacao_moedas\\logs\\log_{formatted_time}.txt"
 
 #Configurando o logging
 logging.basicConfig(filename=log_file_path, level=logging.INFO, 
@@ -186,11 +186,11 @@ try:
             arquivo.write(f"{dolar['cotacaoCompra']},{dolar['cotacaoVenda']},{euro['cotacaoCompra']},{cotacao_yuan},{taxa_selic}")
 
         generated_file_path = "cotacoes_bacen.txt"
-        destination_path = "T:\\Scripts RPA\\Cotação de Moedas\\Cotações\\"
+        destination_path = "C:\\digite\\seu\\repositorio\\cotacao_moedas\\"
         logging.info("Criando o arquivo cotacoes_bacen.")
 
             #Caminho para o arquivo 'cotacao_sgd.txt'
-        path_cotacao_sgd = "T:\\Scripts RPA\\Cotação de Moedas\\Cotações\\cotacao_sgd.txt"      
+        path_cotacao_sgd = "C:\\digite\\seu\\repositorio\\cotacao_moedas\\\cotacao_sgd.txt"      
             #Ler o conteúdo do arquivo 'cotacao_sgd.txt'
         with open(path_cotacao_sgd, 'r') as file_sgd:
             conteudo_sgd = file_sgd.read().strip()
@@ -207,7 +207,7 @@ try:
         logging.info("Combinando arquivos TXTs.")
 
             #Escrever o conteúdo combinado de volta em um arquivo (pode ser um dos existentes ou um novo)
-        with open("T:\\Scripts RPA\\Cotação de Moedas\\Cotações\\cotacao.txt", 'w') as file_new:
+        with open(C:\\digite\\seu\\repositorio\\cotacao_moedas\\cotacao.txt", 'w') as file_new:
             file_new.write(cotacoes)
             logging.info("Arquivos combinados com sucesso.")
 
